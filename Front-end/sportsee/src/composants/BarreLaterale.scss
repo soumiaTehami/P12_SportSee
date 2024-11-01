@@ -1,0 +1,47 @@
+.barre-laterale {
+    width: 80px;
+    height: 100vh;
+    background-color: #020203;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    color: #ffffff;
+  
+    &__navigation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    &__icones {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    &__icone {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  
+    &__copyright {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #fff;
+      margin-top: auto;
+    }
+  }
+  

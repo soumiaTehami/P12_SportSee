@@ -1,18 +1,23 @@
 // src/composants/Navbar.scss
 
 .navbar {
-    background-color: #222;
-    padding: 1rem;
+    background-color:#020203;
     display: flex;
-    justify-content: center;
-
+    justify-content: space-between;
+    align-items:center;
+    
+    
+  
     img {
-        height: 40px; // Ajuste la taille du logo si nécessaire
+      width: 178px;
+      margin-right: 2rem;
+      margin-left: 2rem;
       }
   
     &__list {
+      width: 994px;
       display: flex;
-      gap: 2rem;
+      gap: 200px;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -22,17 +27,7 @@
       }
     }
   
-    &__link {
-      color: #fff;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
-  
-      
-      }
+   
   
      
     }
