@@ -1,0 +1,45 @@
+.nutrient-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; // Aligne les éléments à droite dans le conteneur
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.nutrient-info {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color:#282D30;
+    font-family: Roboto;
+font-size: 20px;
+font-weight: 700;
+line-height: 24px;
+text-align: left;
+
+    gap: 0.5rem;
+    width: 200px; // Ajuste la largeur selon vos besoins
+
+    &__icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .nutrient-info__value {
+            font-size: 1.1rem;
+        }
+
+        .nutrient-info__type {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    }
+
+   
+}
