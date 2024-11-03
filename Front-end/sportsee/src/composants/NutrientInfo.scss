@@ -4,42 +4,41 @@
     align-items: flex-end; // Aligne les éléments à droite dans le conteneur
     gap: 1rem;
     padding: 1rem;
-}
-
-.nutrient-info {
+  }
+  
+  .nutrient-info {
     display: flex;
-    align-items: center;
+    align-items: center; // Aligne l'image et le contenu sur le même niveau
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    color:#282D30;
+    color: #282d30;
     font-family: Roboto;
-font-size: 20px;
-font-weight: 700;
-line-height: 24px;
-text-align: left;
-
-    gap: 0.5rem;
-    width: 200px; // Ajuste la largeur selon vos besoins
-
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    gap: 0.5rem; // Espace entre l'icône et le contenu
+    //width: 200px; // Ajuste la largeur selon vos besoins
+  
     &__icon {
-        width: 30px;
-        height: 30px;
+      width: 60px; // Ajuste la taille de l'icône si nécessaire
+      height: 60px;
     }
-
+  
     &__content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        .nutrient-info__value {
-            font-size: 1.1rem;
-        }
-
-        .nutrient-info__type {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
+      display: flex; // Utilisez flex pour aligner le texte si besoin
+      flex-direction: column; // Les valeurs seront empilées
+      align-items: flex-start;
+        
+      .nutrient-info__value {
+        margin: 0px;
+        font-size: 1rem;
+      }
+  
+      .nutrient-info__type {
+        margin: 0px;
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
     }
-
-   
-}
+  }
+  
