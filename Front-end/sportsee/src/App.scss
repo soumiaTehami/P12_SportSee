@@ -1,35 +1,30 @@
-.app-container {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100vh;
-}
-
-.Navbar {
-    grid-row: 1 / 2;
-    width: 100%;
-    /* Styles pour Navbar */
-}
-
 .main-content {
     display: grid;
-    grid-template-columns: 200px 1fr 250px; // Barre latérale, contenu principal, infos nutritives
+    grid-template-columns: 200px 1fr 250px;
     grid-row: 2 / 3;
     height: 100%;
 }
 
-.BarreLaterale {
-    grid-column: 1 / 2;
-    /* Styles pour BarreLaterale */
+.content-area {
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
 }
 
 .nutrient-info-container {
-    grid-column: 3 / 4;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
     gap: 1rem;
 }
 
-
-
+.InfoUtilisateur {
+    /* Styles pour positionner et styliser InfoUtilisateur */
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

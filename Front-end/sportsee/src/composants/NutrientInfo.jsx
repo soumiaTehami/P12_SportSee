@@ -19,7 +19,7 @@ const NutrientInfo = ({ type, value }) => {
         case "Calories":
             icon = calorie_icon;
             unit = "kCal";
-            colorClass = "nutrient-info--calories";
+           colorClass = "nutrient-info--calories";
             break;
         case "Glucides":
             icon = glucid_icon;
@@ -29,7 +29,7 @@ const NutrientInfo = ({ type, value }) => {
         case "Lipides":
             icon = lipid_icon;
             unit = "g";
-            colorClass = "nutrient-info--lipides";
+           colorClass = "nutrient-info--lipides";
             break;
         case "Proteines":
             icon = protein_icon;
@@ -39,7 +39,7 @@ const NutrientInfo = ({ type, value }) => {
         default:
             icon = '';
             unit = '';
-            colorClass = '';
+           colorClass = '';
     }
 
     return (
