@@ -11,7 +11,7 @@ function App() {
       <div className="main-content">
         <BarreLaterale />
         <div>
-          <InfoUtilisateur name="Thomas" />
+        <InfoUtilisateur userId={18} />
           <div className="nutrient-info-container">
             <NutrientInfo type="Calories" value={2200} />
             <NutrientInfo type="Proteines" value={130} />

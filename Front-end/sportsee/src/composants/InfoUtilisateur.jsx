@@ -1,20 +1,37 @@
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './InfoUtilisateur.scss';
 
-/** Render a personalized greeting for the user.
- * @param {string} name - The user's name.
- * @return {JSX}
- */
-export default function InfoUtilisateur({ name }) {
+export default function InfoUtilisateur({ userId }) {
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        // Simuler une récupération de données avec `fetch`
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/user/${userId}`);
+                
+                const data = await response.json();
+                
+                // Accéder à userInfos depuis data
+                const firstName = data.data.userInfos.firstName; 
+                setUserName(firstName);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données :", error);
+            }
+        };
+
+        fetchData();
+    }, [userId]);
+
     return (
-        <div className="info-utilisateur"> {/* Utilisation d'une balise div pour le conteneur */}
-            <h1>Bonjour, <span className="nom-utilisateur">{name}</span></h1> {/* Utilisation d'une balise span pour le nom */}
-            <span>Félicitations ! Vous avez explosé vos objectifs hier
-            !&nbsp;👏</span>
+        <div className="info-utilisateur">
+            <h1>Bonjour, <span className="nom-utilisateur">{userName || 'Utilisateur'}</span></h1>
+            <span>Félicitations ! Vous avez explosé vos objectifs hier&nbsp;👏</span>
         </div>
     );
 }
 
 InfoUtilisateur.propTypes = {
-    name: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
 };
