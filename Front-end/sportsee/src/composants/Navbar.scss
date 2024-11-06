@@ -1,35 +1,29 @@
 // src/composants/Navbar.scss
 
 .navbar {
-    background-color:#020203;
+  background-color: #020203;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 178px;
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+
+  &__list {
+    width: 994px;
     display: flex;
-    justify-content: space-between;
-    align-items:center;
-    
-    
-  
-    img {
-      width: 178px;
-      margin-right: 2rem;
-      margin-left: 2rem;
-      }
-  
-    &__list {
-      width: 994px;
-      display: flex;
-      gap: 200px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      li {
-        // Applique la couleur blanche directement aux éléments li
-        color: #ffffff;
-      }
+    gap: 200px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      // Applique la couleur blanche directement aux éléments li
+      color: #ffffff;
+      font-family: Roboto;
+      font-size: 20px;
     }
-  
-   
-  
-     
-    }
-  
-  
+  }
+}

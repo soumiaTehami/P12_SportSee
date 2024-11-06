@@ -13,10 +13,10 @@ function App() {
         <div>
         <InfoUtilisateur userId={18} />
           <div className="nutrient-info-container">
-            <NutrientInfo type="Calories" value={2200} />
-            <NutrientInfo type="Proteines" value={130} />
-            <NutrientInfo type="Glucides" value={280} />
-            <NutrientInfo type="Lipides" value={70} />
+            <NutrientInfo type="Calories" userId={12} />
+            <NutrientInfo type="Proteines" userId={12}  />
+            <NutrientInfo type="Glucides" userId={12}  />
+            <NutrientInfo type="Lipides" userId={12}  />
           </div>
         </div>
       </div>

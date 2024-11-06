@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './NutrientInfo.scss';
 import calorie_icon from '../assets/icon-calorie.png';
@@ -5,41 +6,76 @@ import glucid_icon from '../assets/icon-carbohydrate.png';
 import lipid_icon from '../assets/icon-lipid.png';
 import protein_icon from '../assets/icon-protein.png';
 
-/**
- * NutrientInfo component to display nutrient information in a badge format
- * @param {Object} props - The props for the component
- * @param {string} props.type - The type of nutrient (e.g., "Calories", "Glucides", "Lipides", "Proteines")
- * @param {number} props.value - The value of the nutrient
- * @returns {JSX.Element} The NutrientInfo component
- */
-const NutrientInfo = ({ type, value }) => {
-    let icon, unit, colorClass;
+const NutrientInfo = ({ type, userId }) => {
+    const [value, setValue] = useState(null);
+    const [icon, setIcon] = useState(null);
+    const [unit, setUnit] = useState('');
+    const [colorClass, setColorClass] = useState('');
 
-    switch(type) {
-        case "Calories":
-            icon = calorie_icon;
-            unit = "kCal";
-            colorClass = "nutrient-info--calories";
-            break;
-        case "Glucides":
-            icon = glucid_icon;
-            unit = "g";
-            colorClass = "nutrient-info--glucides";
-            break;
-        case "Lipides":
-            icon = lipid_icon;
-            unit = "g";
-            colorClass = "nutrient-info--lipides";
-            break;
-        case "Proteines":
-            icon = protein_icon;
-            unit = "g";
-            colorClass = "nutrient-info--proteines";
-            break;
-        default:
-            icon = '';
-            unit = '';
-            colorClass = '';
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/user/${userId}`);
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la récupération des données");
+                }
+                const result = await response.json();
+                
+                const userData = result.data; // Accéder aux données utilisateur dans `result.data`
+
+                if (userData) {
+                    let nutrientValue;
+                    let iconImage;
+                    let unitLabel;
+                    let colorClassName;
+
+                    switch(type) {
+                        case "Calories":
+                            nutrientValue = userData.keyData.calorieCount;
+                            iconImage = calorie_icon;
+                            unitLabel = "kCal";
+                            colorClassName = "nutrient-info--calories";
+                            break;
+                        case "Glucides":
+                            nutrientValue = userData.keyData.carbohydrateCount;
+                            iconImage = glucid_icon;
+                            unitLabel = "g";
+                            colorClassName = "nutrient-info--glucides";
+                            break;
+                        case "Lipides":
+                            nutrientValue = userData.keyData.lipidCount;
+                            iconImage = lipid_icon;
+                            unitLabel = "g";
+                            colorClassName = "nutrient-info--lipides";
+                            break;
+                        case "Proteines":
+                            nutrientValue = userData.keyData.proteinCount;
+                            iconImage = protein_icon;
+                            unitLabel = "g";
+                            colorClassName = "nutrient-info--proteines";
+                            break;
+                        default:
+                            nutrientValue = null;
+                            iconImage = '';
+                            unitLabel = '';
+                            colorClassName = '';
+                    }
+
+                    setValue(nutrientValue);
+                    setIcon(iconImage);
+                    setUnit(unitLabel);
+                    setColorClass(colorClassName);
+                }
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données:", error);
+            }
+        };
+
+        fetchData();
+    }, [type, userId]);
+
+    if (value === null) {
+        return <p>Chargement...</p>;
     }
 
     return (
@@ -53,10 +89,9 @@ const NutrientInfo = ({ type, value }) => {
     );
 };
 
-// Définition des types pour les props
 NutrientInfo.propTypes = {
     type: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
 };
 
 export default NutrientInfo;
