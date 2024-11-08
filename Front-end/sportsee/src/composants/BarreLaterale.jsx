@@ -6,7 +6,7 @@ import dumbbell from '../assets/dumbbell.png'
 import './BarreLaterale.scss';
 
 const BarreLaterale = () => {
-    const annee = new Date().getFullYear();
+ const annee = new Date().getFullYear();
 
     return (
         <section className="barre-laterale">
