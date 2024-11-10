@@ -1,0 +1,36 @@
+// Error.scss
+.Main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #333;
+  
+    .Title {
+      font-size: 6rem;
+      font-weight: bold;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+  
+    a {
+      font-size: 1rem;
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+  
+      &:hover {
+        color: #0056b3;
+      }
+    }
+  }
+  
