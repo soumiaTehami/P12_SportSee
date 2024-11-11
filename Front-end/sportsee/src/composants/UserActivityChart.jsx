@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import './UserActivityChart.scss';
+
 /**
  * Composant UserActivityChart
  * 
@@ -44,7 +45,7 @@ const UserActivityChart = ({ userId }) => {
                 <BarChart data={activityData} barSize={7} barGap={8} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" tickFormatter={formatDay} tickLine={false} tickMargin={16} tick={{ stroke: '#9B9EAC', fontSize: 14, fontWeight: 500 }} />
-                    <YAxis axisLine={false} tickLine={false} orientation="right" />
+                    <YAxis axisLine={false} tickLine={false} orientation="right" domain={[1, 100]} tickCount={10} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend iconType="circle" iconSize={8} height={80} verticalAlign="top" align="right" />
                     <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" radius={[3.5, 3.5, 0, 0]} />
@@ -78,4 +79,3 @@ CustomTooltip.propTypes = {
 };
 
 export default UserActivityChart;
-

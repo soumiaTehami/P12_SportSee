@@ -33,5 +33,10 @@
     justify-content: space-between;
     margin-bottom: 20px;
   }
-
+  .charts-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px; /* Espacement entre les graphiques */
+}
 
