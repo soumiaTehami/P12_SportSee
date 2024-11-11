@@ -34,10 +34,9 @@ const AverageSessionDurationChart = ({ userId }) => {
 
     return (
         <div className="average-session-duration-chart">
-            <h2 className="average-session-title">Durée moyenne des sessions</h2>
-            <ResponsiveContainer width="100%" height={250}>
+            <h2 className="average-session-title">Durée moyenne des <br />sessions</h2>
+            <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={sessionData} margin={{ top: 20, right: 20, left: 20, bottom: 0 }}>
-                    {/* Suppression de la grille */}
                     <XAxis 
                         dataKey="day" 
                         tickFormatter={(tick) => String.fromCharCode(65 + tick)} // Conversion des chiffres en lettres A, B, C, ...
