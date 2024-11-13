@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer
@@ -8,22 +9,59 @@ const ACTIVITIES_ORDER_IN_CHART = [
   "Intensité", "Vitesse", "Force", "Endurance", "Energie", "Cardio",
 ];
 
-// Exemple de données factices
-const dummyData = [
-  { activity: "Intensité", value: 70 },
-  { activity: "Vitesse", value: 80 },
-  { activity: "Force", value: 60 },
-  { activity: "Endurance", value: 90 },
-  { activity: "Energie", value: 50 },
-  { activity: "Cardio", value: 100 },
-];
+// Composant principal
+export function ActivitiesChart({ userId }) {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-// Déclaration du composant principal
-export function ActivitiesChart() {
-  // Réorganise les activités selon l'ordre défini
+  useEffect(() => {
+    if (userId == null) {
+      setError("L'ID utilisateur est manquant ou invalide.");
+      setIsLoading(false);
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/user/${userId}/performance`);
+        
+        if (!response.ok) {
+          throw new Error(`Erreur de chargement des données : ${response.statusText}`);
+        }
+
+        const result = await response.json();
+
+        if (result && result.data && result.data.data && Array.isArray(result.data.data)) {
+          const transformedData = result.data.data.map(item => {
+            const activityName = result.data.kind[item.kind];
+            return {
+              activity: activityName,
+              value: item.value,
+            };
+          });
+
+          setData(transformedData);
+        } else {
+          setError("Les données récupérées ne sont pas au format attendu");
+        }
+      } catch (err) {
+        console.error('Erreur lors de la récupération des données:', err);
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  if (isLoading) return <div>Chargement des données...</div>;
+  if (error) return <div>Erreur : {error}</div>;
+
   const orderedActivities = ACTIVITIES_ORDER_IN_CHART.map(activity => ({
     activity,
-    value: dummyData.find(item => item.activity === activity)?.value || 0,
+    value: data.find(item => item.activity === activity)?.value || 0,
   }));
 
   return (
@@ -46,9 +84,9 @@ export function ActivitiesChart() {
           />
           <Radar
             dataKey="value"
-            fill="#FF0101B2"
+            fill="#FF0000"   // Remplacez la couleur par rouge
             fillOpacity={0.7}
-            stroke="transparent"
+            stroke="#FF0000"  // Ligne de contour également en rouge pour unifier le style
           />
         </RadarChart>
       </ResponsiveContainer>
@@ -57,7 +95,7 @@ export function ActivitiesChart() {
 }
 
 ActivitiesChart.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.number.isRequired,
 };
 
 // Style du conteneur du graphique

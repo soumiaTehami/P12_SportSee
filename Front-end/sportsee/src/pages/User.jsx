@@ -7,26 +7,33 @@ import AverageSessionDurationChart from '../composants/AverageSessionDurationCha
 import '../App.scss';
 import { useParams } from 'react-router-dom';
 import { ActivitiesChart } from '../composants/ActivitiesChart';
-// import { ActivitiesChart } from '../composants/ActivitiesChart';
+import ProgressionChart from '../composants/ProgressionChart';
 
 function User() {
     const { userid } = useParams(); // Récupère l'userid depuis les paramètres de l'URL
     const userId = Number(userid);  // Convertir l'userid en nombre
+    
+    if (isNaN(userId)) {
+        return <div>Erreur : ID utilisateur invalide</div>;
+    }
 
-    console.log(userId); // Vérifier que userId est bien un nombre
+    console.log("ID utilisateur:", userId); // Vérifier que userId est bien un nombre
 
     return (
         <div className="app-container">
             <Navbar />
             <div className="main-content">
                 <BarreLaterale />
-                <div>
+                <div className="user-details-container">
                     <InfoUtilisateur userId={userId} />
                     <div className="info-activity-container">
                         <div className="charts-container">
                             <UserActivityChart userId={userId} />
+                            <div className="charts-group">
                             <AverageSessionDurationChart userId={userId} />
-                            <ActivitiesChart  />
+                            <ActivitiesChart userId={userId} />
+                            <ProgressionChart/>
+                        </div>
                         </div>
                         <div className="nutrient-info-container">
                             <NutrientInfo type="Calories" userId={userId} />

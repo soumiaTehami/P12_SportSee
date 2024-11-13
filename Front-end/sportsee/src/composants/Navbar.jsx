@@ -1,7 +1,8 @@
 // src/components/Navbar
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
-
 import './Navbar.scss';
+
 const Navbar = () => {
   return (
     <nav className="navbar">
@@ -9,21 +10,19 @@ const Navbar = () => {
       <ul className="navbar__list">
         <li>
           {/* Accueil */}
-          
-          <span>Accueil</span>
+          <NavLink to="/">Accueil</NavLink>
         </li>
-        
         <li>
           {/* Profil */}
-          <span>Profil</span>
+          <NavLink to="#">Profil</NavLink>
         </li>
         <li>
-          {/*Réglage  */}
-          <span>Réglage</span>
+          {/* Réglage */}
+          <NavLink to="#">Réglage</NavLink>
         </li>
         <li>
-          {/*Communauté*/}
-          <span>Communauté</span>
+          {/* Communauté */}
+          <NavLink to="#">Communauté</NavLink>
         </li>
       </ul>
     </nav>

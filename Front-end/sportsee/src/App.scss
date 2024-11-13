@@ -39,4 +39,9 @@
     flex-direction: column;
     gap: 20px; /* Espacement entre les graphiques */
 }
+.charts-group {
+    display: flex;
+    gap: 20px; /* Espacement entre AverageSessionDurationChart et ActivitiesChart */
+    width: 100%; /* Pour occuper la largeur disponible */
+}
 
