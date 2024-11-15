@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer
 } from 'recharts';
-import styled from 'styled-components';
+import './ActivitiesChart.scss';
 
 const ACTIVITIES_ORDER_IN_CHART = [
   "Intensité", "Vitesse", "Force", "Endurance", "Energie", "Cardio",
 ];
 
-// Composant principal
 export function ActivitiesChart({ userId }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,15 +31,11 @@ export function ActivitiesChart({ userId }) {
 
         const result = await response.json();
 
-        if (result && result.data && result.data.data && Array.isArray(result.data.data)) {
-          const transformedData = result.data.data.map(item => {
-            const activityName = result.data.kind[item.kind];
-            return {
-              activity: activityName,
-              value: item.value,
-            };
-          });
-
+        if (result && result.data && result.data.kind && Array.isArray(result.data.data)) {
+          const transformedData = result.data.data.map(item => ({
+            activity: result.data.kind[item.kind] || 'Inconnu',
+            value: item.value,
+          }));
           setData(transformedData);
         } else {
           setError("Les données récupérées ne sont pas au format attendu");
@@ -65,7 +60,7 @@ export function ActivitiesChart({ userId }) {
   }));
 
   return (
-    <ActivitiesChartContainer>
+    <div className="activities-chart-container">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart
           data={orderedActivities}
@@ -84,25 +79,16 @@ export function ActivitiesChart({ userId }) {
           />
           <Radar
             dataKey="value"
-            fill="#FF0000"   // Remplacez la couleur par rouge
+            fill="#FF0000"
             fillOpacity={0.7}
-            stroke="#FF0000"  // Ligne de contour également en rouge pour unifier le style
+            stroke="#FF0000"
           />
         </RadarChart>
       </ResponsiveContainer>
-    </ActivitiesChartContainer>
+    </div>
   );
 }
 
 ActivitiesChart.propTypes = {
   userId: PropTypes.number.isRequired,
 };
-
-// Style du conteneur du graphique
-const ActivitiesChartContainer = styled.div`
-  background: #282D30;
-  padding: 20px;
-  border-radius: 10px;
-  width: 200px;
-  height: 200px;
-`;

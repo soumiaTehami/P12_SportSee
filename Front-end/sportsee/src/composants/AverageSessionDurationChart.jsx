@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { AverageSession } from '../service/getData'; // Import de la fonction AverageSession
 import './AverageSessionDurationChart.scss';
 
 /**
@@ -18,9 +19,8 @@ const AverageSessionDurationChart = ({ userId }) => {
     useEffect(() => {
         const fetchSessionData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/user/${userId}/average-sessions`);
-                const result = await response.json();
-                
+                const result = await AverageSession(userId); // Utilisation de la fonction AverageSession
+
                 if (result && result.data) {
                     setSessionData(result.data.sessions);
                 }

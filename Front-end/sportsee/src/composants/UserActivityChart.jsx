@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { Activities } from '../service/getData'; // Import de la fonction Activities
 import './UserActivityChart.scss';
 
 /**
@@ -10,7 +11,6 @@ import './UserActivityChart.scss';
  * 
  * @param {Object} props - Les propriétés du composant
  * @param {number} props.userId - L'ID de l'utilisateur pour lequel les données d'activité sont récupérées
- * @param {number} [props.progression] - La progression actuelle de l'objectif
  * @returns {JSX.Element} - Le composant UserActivityChart
  */
 const UserActivityChart = ({ userId }) => {
@@ -19,9 +19,8 @@ const UserActivityChart = ({ userId }) => {
     useEffect(() => {
         const fetchActivityData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/user/${userId}/activity`);
-                const result = await response.json();
-                
+                const result = await Activities(userId); // Utilisation de la fonction Activities
+
                 if (result && result.data) {
                     setActivityData(result.data.sessions);
                 }
@@ -61,8 +60,8 @@ const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip">
-                <p>{`Calories brûlées : ${payload[0]?.value || 0} kCal`}</p>
-                <p>{`Poids : ${payload[1]?.value || 0} kg`}</p>
+                <p>{` ${payload[0]?.value || 0} kCal`}</p>
+                <p>{`${payload[1]?.value || 0} kg`}</p>
             </div>
         );
     }

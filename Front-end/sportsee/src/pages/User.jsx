@@ -32,7 +32,7 @@ function User() {
                             <div className="charts-group">
                             <AverageSessionDurationChart userId={userId} />
                             <ActivitiesChart userId={userId} />
-                            <ProgressionChart/>
+                            <ProgressionChart userId={userId}/>
                         </div>
                         </div>
                         <div className="nutrient-info-container">
