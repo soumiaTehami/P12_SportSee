@@ -62,5 +62,3 @@ export const Score= async (userId) => {
     console.error("Erreur lors de la récupération des données:", err);
   }
 };
-Score (12);
-Score(18);

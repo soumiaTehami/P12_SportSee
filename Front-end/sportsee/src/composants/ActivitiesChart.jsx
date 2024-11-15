@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer,
 } from 'recharts';
 import './ActivitiesChart.scss';
+
+const KIND_TO_ACTIVITY_MAP = {
+  1: "Cardio",
+  2: "Energie",
+  3: "Endurance",
+  4: "Force",
+  5: "Vitesse",
+  6: "Intensité",
+};
 
 const ACTIVITIES_ORDER_IN_CHART = [
   "Intensité", "Vitesse", "Force", "Endurance", "Energie", "Cardio",
@@ -33,7 +42,7 @@ export function ActivitiesChart({ userId }) {
 
         if (result && result.data && result.data.kind && Array.isArray(result.data.data)) {
           const transformedData = result.data.data.map(item => ({
-            activity: result.data.kind[item.kind] || 'Inconnu',
+            activity: KIND_TO_ACTIVITY_MAP[item.kind] || 'Inconnu',
             value: item.value,
           }));
           setData(transformedData);
@@ -54,6 +63,7 @@ export function ActivitiesChart({ userId }) {
   if (isLoading) return <div>Chargement des données...</div>;
   if (error) return <div>Erreur : {error}</div>;
 
+  // Réorganiser les données selon l'ordre défini dans ACTIVITIES_ORDER_IN_CHART
   const orderedActivities = ACTIVITIES_ORDER_IN_CHART.map(activity => ({
     activity,
     value: data.find(item => item.activity === activity)?.value || 0,

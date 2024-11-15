@@ -11,8 +11,17 @@
   }
   
   .percentage-text {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
     fill: #000;  /* Vous pouvez changer la couleur du texte ici */
+  }
+  tspan{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    text-align: center;
+    
+
   }
   
