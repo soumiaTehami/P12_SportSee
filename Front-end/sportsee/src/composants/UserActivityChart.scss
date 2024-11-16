@@ -28,3 +28,25 @@
     }
   
    }  
+   .custom-legend {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .legend-icon {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}

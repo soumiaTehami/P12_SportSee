@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { Score } from "../service/getData"; // Import de la fonction Score
 import "./ProgressionChart.scss";
 
 const COLORS = ["#FF0000"];
@@ -17,29 +18,29 @@ function ProgressionChart({ userId }) {
       return;
     }
 
-    const url = `http://localhost:3000/user/${userId}`;
+    const fetchScoreData = async () => {
+      try {
+        const responseData = await Score(userId); // Utilisation de la fonction Score
 
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP : ${response.status}`);
+        if (!responseData || !responseData.data) {
+          throw new Error("Les données récupérées ne sont pas valides.");
         }
-        return response.json();
-      })
-      .then((responseData) => {
-        const data = responseData?.data; // Accéder à la clé `data`
-        console.log("Données récupérées :", data);
+
+        const data = responseData.data;
 
         // Utiliser `score` ou `todayScore`
         const score = data?.score ?? data?.todayScore ?? 0;
+
         setScoreData([
           { name: "Progression", value: score },
           { name: "Reste", value: 1 - score },
         ]);
-      })
-      .catch((error) =>
-        console.error("Erreur lors de la récupération des données :", error)
-      );
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+      }
+    };
+
+    fetchScoreData();
   }, [userId]);
 
   return (

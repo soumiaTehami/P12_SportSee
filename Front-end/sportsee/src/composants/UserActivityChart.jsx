@@ -34,7 +34,7 @@ const UserActivityChart = ({ userId }) => {
 
     // Fonction de formatage pour les jours
     const formatDay = (day) => {
-        return day.slice(-1);  // Affiche le dernier chiffre pour simplifier
+        return day.slice(-1); // Affiche le dernier chiffre pour simplifier
     };
 
     return (
@@ -42,11 +42,11 @@ const UserActivityChart = ({ userId }) => {
             <h2>Activité quotidienne</h2>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={activityData} barSize={7} barGap={8} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} /> {/* Désactive les lignes verticales */}
                     <XAxis dataKey="day" tickFormatter={formatDay} tickLine={false} tickMargin={16} tick={{ stroke: '#9B9EAC', fontSize: 14, fontWeight: 500 }} />
                     <YAxis axisLine={false} tickLine={false} orientation="right" domain={[1, 100]} tickCount={10} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Legend iconType="circle" iconSize={8} height={80} verticalAlign="top" align="right" />
+                    <Legend content={<CustomLegend />} height={80} verticalAlign="top" align="right" />
                     <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" radius={[3.5, 3.5, 0, 0]} />
                     <Bar name="Calories brûlées (kCal)" dataKey="calories" fill="#E60000" radius={[3.5, 3.5, 0, 0]} />
                 </BarChart>
@@ -66,6 +66,22 @@ const CustomTooltip = ({ active, payload }) => {
         );
     }
     return null;
+};
+
+// CustomLegend Component
+const CustomLegend = () => {
+    return (
+        <div className="custom-legend">
+            <div className="legend-item">
+                <span className="legend-icon" style={{ backgroundColor: '#282D30' }}></span>
+                <span className="legend-text">Poids (kg)</span>
+            </div>
+            <div className="legend-item">
+                <span className="legend-icon" style={{ backgroundColor: '#E60000' }}></span>
+                <span className="legend-text" style={{ color: '#000000' }}>Calories brûlées (kCal)</span>
+            </div>
+        </div>
+    );
 };
 
 UserActivityChart.propTypes = {

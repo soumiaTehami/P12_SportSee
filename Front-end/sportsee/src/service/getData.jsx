@@ -1,4 +1,19 @@
 const baseUrl = `http://localhost:3000/user`;
+export const Utilisateur= async (userId) => {
+  try {
+    const response = await fetch(baseUrl + `/${userId}`);
+
+    if (!response.ok) {
+      throw new Error(
+        `Erreur de chargement des données : ${response.statusText}`
+      );
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error("Erreur lors de la récupération des données:", err);
+  }
+};
 
 export const Activities = async (userId) => {
   try {
@@ -45,20 +60,19 @@ export const Performance= async (userId) => {
     console.error("Erreur lors de la récupération des données:", err);
   }
 };
-export const Score= async (userId) => {
+export const Score = async (userId) => {
   try {
-    const response = await fetch(baseUrl + `/${userId}/`);
-
+    const response = await fetch(`${baseUrl}/${userId}/`);
     if (!response.ok) {
       throw new Error(
         `Erreur de chargement des données : ${response.statusText}`
       );
     }
 
-    const r= await response.json();
-    console.log(r);
-    
+    const data = await response.json(); // Parse le JSON obtenu
+    return data; // Retourne les données
   } catch (err) {
-    console.error("Erreur lors de la récupération des données:", err);
+    console.error("Erreur lors de la récupération des données :", err);
+    throw err; // Relance l'erreur pour une gestion potentielle en amont
   }
 };

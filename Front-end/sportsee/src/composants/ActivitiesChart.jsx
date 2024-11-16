@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer,
 } from 'recharts';
+import { Performance } from '../service/getData'; // Import de la fonction Performance
 import './ActivitiesChart.scss';
 
 const KIND_TO_ACTIVITY_MAP = {
@@ -32,13 +33,7 @@ export function ActivitiesChart({ userId }) {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/user/${userId}/performance`);
-        
-        if (!response.ok) {
-          throw new Error(`Erreur de chargement des données : ${response.statusText}`);
-        }
-
-        const result = await response.json();
+        const result = await Performance(userId); // Utilisation de la fonction Performance
 
         if (result && result.data && result.data.kind && Array.isArray(result.data.data)) {
           const transformedData = result.data.data.map(item => ({

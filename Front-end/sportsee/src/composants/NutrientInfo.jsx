@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Utilisateur } from '../service/getData'; // Importer la fonction Utilisateur
 import './NutrientInfo.scss';
 import calorie_icon from '../assets/icon-calorie.png';
 import glucid_icon from '../assets/icon-carbohydrate.png';
@@ -15,11 +16,7 @@ const NutrientInfo = ({ type, userId }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/user/${userId}`);
-                if (!response.ok) {
-                    throw new Error("Erreur lors de la récupération des données");
-                }
-                const result = await response.json();
+                const result = await Utilisateur(userId); // Utilisation de la fonction Utilisateur
                 
                 const userData = result.data; // Accéder aux données utilisateur dans `result.data`
 
