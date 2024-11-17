@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { Activities } from '../service/getData'; // Import de la fonction Activities
+import { Activities } from '../../service/getData'; // Import de la fonction Activities
 import './UserActivityChart.scss';
 
 /**

@@ -6,12 +6,12 @@
 
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Utilisateur } from '../service/getData'; // Importer la fonction Utilisateur
+import { Utilisateur } from '../../service/getData'; // Importer la fonction Utilisateur
 import './NutrientInfo.scss';
-import calorie_icon from '../assets/icon-calorie.png';
-import glucid_icon from '../assets/icon-carbohydrate.png';
-import lipid_icon from '../assets/icon-lipid.png';
-import protein_icon from '../assets/icon-protein.png';
+import calorie_icon from '../../assets/icon-calorie.png';
+import glucid_icon from '../../assets/icon-carbohydrate.png';
+import lipid_icon from '../../assets/icon-lipid.png';
+import protein_icon from '../../assets/icon-protein.png';
 
 /**
  * NutrientInfo

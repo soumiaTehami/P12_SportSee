@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer,
 } from 'recharts';
-import { Performance } from '../service/getData'; // Import de la fonction Performance
+import { Performance } from '../../service/getData'; // Import de la fonction Performance
 import './ActivitiesChart.scss';
 
 const KIND_TO_ACTIVITY_MAP = {

@@ -1,13 +1,13 @@
-import Navbar from '../composants/Navbar';
-import BarreLaterale from '../composants/BarreLaterale';
-import NutrientInfo from '../composants/NutrientInfo';
-import InfoUtilisateur from '../composants/InfoUtilisateur';
-import UserActivityChart from '../composants/UserActivityChart';
-import AverageSessionDurationChart from '../composants/AverageSessionDurationChart';
+import Navbar from '../composants/Navbar/Navbar';
+import BarreLaterale from '../composants/BarreLaterale/BarreLaterale';
+import NutrientInfo from '../composants/NutrientInfo/NutrientInfo';
+import InfoUtilisateur from '../composants/Utilisateur/InfoUtilisateur';
+import UserActivityChart from '../composants/UserActivity/UserActivityChart';
+import AverageSessionDurationChart from '../composants/AverageSession/AverageSessionDurationChart';
 import '../App.scss';
 import { useParams } from 'react-router-dom';
-import { ActivitiesChart } from '../composants/ActivitiesChart';
-import ProgressionChart from '../composants/ProgressionChart';
+import { ActivitiesChart } from '../composants/Activities/ActivitiesChart';
+import ProgressionChart from '../composants/Progression/ProgressionChart';
 
 function User() {
     const { userid } = useParams(); // Récupère l'userid depuis les paramètres de l'URL

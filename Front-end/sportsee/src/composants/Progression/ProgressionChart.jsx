@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { Score } from "../service/getData"; // Import de la fonction Score
+import { Score } from "../../service/getData"; // Import de la fonction Score
 import "./ProgressionChart.scss";
 
 const COLORS = ["#FF0000"];

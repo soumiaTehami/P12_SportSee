@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Utilisateur } from '../service/getData'; // Importer la fonction Utilisateur
+import { Utilisateur } from '../../service/getData'; // Importer la fonction Utilisateur
 import './InfoUtilisateur.scss';
 
 /**

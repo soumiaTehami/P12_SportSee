@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { AverageSession } from '../service/getData'; // Import de la fonction AverageSession
+import { AverageSession } from '../../service/getData'; // Import de la fonction AverageSession
 import './AverageSessionDurationChart.scss';
 
 /**

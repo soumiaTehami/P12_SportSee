@@ -3,10 +3,10 @@
  * @description Composant pour afficher une barre latérale avec des icônes d'activités sportives et un copyright dynamique.
  */
 
-import yoga from '../assets/yoga.png';
-import swim from '../assets/swim.png';
-import bike from '../assets/bike.png';
-import dumbbell from '../assets/dumbbell.png';
+import yoga from '../../assets/yoga.png';
+import swim from '../../assets/swim.png';
+import bike from '../../assets/bike.png';
+import dumbbell from '../../assets/dumbbell.png';
 import './BarreLaterale.scss';
 
 /**
