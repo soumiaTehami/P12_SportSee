@@ -1,3 +1,8 @@
+/**
+ * @file ActivitiesChart.jsx
+ * @description Ce fichier contient le composant ActivitiesChart, qui affiche un graphique radar des performances d'un utilisateur pour différentes activités.
+ */
+
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -19,6 +24,20 @@ const ACTIVITIES_ORDER_IN_CHART = [
   "Intensité", "Vitesse", "Force", "Endurance", "Energie", "Cardio",
 ];
 
+/**
+ * Composant React pour afficher un graphique radar des activités d'un utilisateur.
+ *
+ * @component
+ * @param {Object} props Les propriétés du composant.
+ * @param {number} props.userId L'identifiant unique de l'utilisateur pour récupérer ses données.
+ *
+ * @returns {JSX.Element} Un graphique radar montrant les performances de l'utilisateur pour différentes activités.
+ *
+ * @example
+ * <ActivitiesChart userId={12} />
+ *
+ * @throws Affiche un message d'erreur si l'ID utilisateur est manquant ou si les données ne sont pas disponibles.
+ */
 export function ActivitiesChart({ userId }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +52,7 @@ export function ActivitiesChart({ userId }) {
 
     const fetchData = async () => {
       try {
-        const result = await Performance(userId); // Utilisation de la fonction Performance
+        const result = await Performance(userId);
 
         if (result && result.data && result.data.kind && Array.isArray(result.data.data)) {
           const transformedData = result.data.data.map(item => ({
@@ -95,5 +114,6 @@ export function ActivitiesChart({ userId }) {
 }
 
 ActivitiesChart.propTypes = {
+  /** L'identifiant unique de l'utilisateur. */
   userId: PropTypes.number.isRequired,
 };

@@ -1,5 +1,21 @@
+/**
+ * @file getData.js
+ * @description Ce fichier contient des fonctions pour interagir avec l'API utilisateur. Chaque fonction permet de
+ * récupérer des données spécifiques en fonction de l'ID utilisateur.
+ */
+
 const baseUrl = `http://localhost:3000/user`;
-export const Utilisateur= async (userId) => {
+
+/**
+ * Récupère les informations générales d'un utilisateur.
+ *
+ * @async
+ * @function Utilisateur
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} Les données utilisateur sous forme d'objet JSON.
+ * @throws {Error} Lance une erreur si la récupération échoue.
+ */
+export const Utilisateur = async (userId) => {
   try {
     const response = await fetch(baseUrl + `/${userId}`);
 
@@ -15,6 +31,15 @@ export const Utilisateur= async (userId) => {
   }
 };
 
+/**
+ * Récupère les données d'activité quotidienne d'un utilisateur.
+ *
+ * @async
+ * @function Activities
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} Les données d'activité sous forme d'objet JSON.
+ * @throws {Error} Lance une erreur si la récupération échoue.
+ */
 export const Activities = async (userId) => {
   try {
     const response = await fetch(baseUrl + `/${userId}/activity`);
@@ -30,7 +55,17 @@ export const Activities = async (userId) => {
     console.error("Erreur lors de la récupération des données:", err);
   }
 };
-export const AverageSession= async (userId) => {
+
+/**
+ * Récupère les données des sessions moyennes d'un utilisateur.
+ *
+ * @async
+ * @function AverageSession
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} Les données de sessions moyennes sous forme d'objet JSON.
+ * @throws {Error} Lance une erreur si la récupération échoue.
+ */
+export const AverageSession = async (userId) => {
   try {
     const response = await fetch(baseUrl + `/${userId}/average-sessions`);
 
@@ -45,7 +80,17 @@ export const AverageSession= async (userId) => {
     console.error("Erreur lors de la récupération des données:", err);
   }
 };
-export const Performance= async (userId) => {
+
+/**
+ * Récupère les données de performance d'un utilisateur.
+ *
+ * @async
+ * @function Performance
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} Les données de performance sous forme d'objet JSON.
+ * @throws {Error} Lance une erreur si la récupération échoue.
+ */
+export const Performance = async (userId) => {
   try {
     const response = await fetch(baseUrl + `/${userId}/performance`);
 
@@ -60,6 +105,16 @@ export const Performance= async (userId) => {
     console.error("Erreur lors de la récupération des données:", err);
   }
 };
+
+/**
+ * Récupère le score quotidien d'un utilisateur.
+ *
+ * @async
+ * @function Score
+ * @param {number} userId - L'ID de l'utilisateur.
+ * @returns {Promise<Object>} Les données de score sous forme d'objet JSON.
+ * @throws {Error} Lance une erreur si la récupération échoue.
+ */
 export const Score = async (userId) => {
   try {
     const response = await fetch(`${baseUrl}/${userId}/`);

@@ -1,3 +1,9 @@
+/**
+ * @file NutrientInfo.jsx
+ * @description Composant React pour afficher des informations nutritionnelles (calories, glucides, lipides, protéines)
+ * d'un utilisateur en fonction de son ID.
+ */
+
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Utilisateur } from '../service/getData'; // Importer la fonction Utilisateur
@@ -7,6 +13,25 @@ import glucid_icon from '../assets/icon-carbohydrate.png';
 import lipid_icon from '../assets/icon-lipid.png';
 import protein_icon from '../assets/icon-protein.png';
 
+/**
+ * NutrientInfo
+ *
+ * @component
+ * @description Ce composant affiche une carte contenant une icône, une valeur, et un type (calories, glucides, lipides, protéines)
+ * pour représenter une information nutritionnelle spécifique de l'utilisateur.
+ *
+ * @param {Object} props Les propriétés du composant.
+ * @param {string} props.type Le type d'information nutritionnelle à afficher (e.g., "Calories", "Glucides").
+ * @param {number} props.userId L'identifiant unique de l'utilisateur pour récupérer ses données.
+ *
+ * @returns {JSX.Element} Une carte contenant une icône, une valeur et le type nutritionnel correspondant.
+ *
+ * @example
+ * <NutrientInfo type="Calories" userId={12} />
+ * <NutrientInfo type="Glucides" userId={12} />
+ *
+ * @throws {Error} Si les données ne peuvent pas être récupérées depuis l'API.
+ */
 const NutrientInfo = ({ type, userId }) => {
     const [value, setValue] = useState(null);
     const [icon, setIcon] = useState(null);
@@ -87,7 +112,9 @@ const NutrientInfo = ({ type, userId }) => {
 };
 
 NutrientInfo.propTypes = {
+    /** Le type d'information nutritionnelle à afficher. Doit être l'un des suivants : "Calories", "Glucides", "Lipides", "Proteines". */
     type: PropTypes.string.isRequired,
+    /** L'identifiant unique de l'utilisateur pour récupérer ses données. */
     userId: PropTypes.number.isRequired,
 };
 
