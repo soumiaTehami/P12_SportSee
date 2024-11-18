@@ -12,3 +12,16 @@
   padding: 1rem; /* Espacement interne */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.custom-tooltip {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}

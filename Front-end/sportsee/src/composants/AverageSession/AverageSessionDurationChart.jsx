@@ -1,8 +1,27 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { AverageSession } from '../../service/getData'; // Import de la fonction AverageSession
+import { AverageSession } from '../../service/getData';
 import './AverageSessionDurationChart.scss';
+
+/**
+ * Tooltip personnalisé pour afficher la durée dans un carré blanc.
+ */
+const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="custom-tooltip">
+                <p className="tooltip-value">{`${payload[0].value} min`}</p>
+            </div>
+        );
+    }
+    return null;
+};
+
+CustomTooltip.propTypes = {
+    active: PropTypes.bool,
+    payload: PropTypes.array,
+};
 
 /**
  * Composant AverageSessionDurationChart
@@ -19,7 +38,7 @@ const AverageSessionDurationChart = ({ userId }) => {
     useEffect(() => {
         const fetchSessionData = async () => {
             try {
-                const result = await AverageSession(userId); // Utilisation de la fonction AverageSession
+                const result = await AverageSession(userId);
 
                 if (result && result.data) {
                     setSessionData(result.data.sessions);
@@ -39,21 +58,19 @@ const AverageSessionDurationChart = ({ userId }) => {
                 <LineChart data={sessionData} margin={{ top: 20, right: 20, left: 20, bottom: 0 }}>
                     <XAxis 
                         dataKey="day" 
-                        tickFormatter={(tick) => String.fromCharCode(65 + tick)} // Conversion des chiffres en lettres A, B, C, ...
-                        tick={{ fontSize: 12, fontWeight: 500, fill: '#fff' }} // Couleur des tick labels
-                        axisLine={false} // Désactive la ligne de l'axe X
-                        tickLine={false} // Désactive les ticks de l'axe X
+                        tickFormatter={(tick) => String.fromCharCode(65 + tick)} 
+                        tick={{ fontSize: 12, fontWeight: 500, fill: '#fff' }}
+                        axisLine={false} 
+                        tickLine={false} 
                     />
-                    <YAxis 
-                        hide={true} // Masquer l'axe Y
-                    />
-                    <Tooltip />
+                    <YAxis hide={true} />
+                    <Tooltip content={<CustomTooltip />} />
                     <Line 
                         type="monotone" 
                         dataKey="sessionLength" 
-                        stroke="#D3D3D3" // Gris clair pour la ligne
+                        stroke="#D3D3D3" 
                         strokeWidth={2} 
-                        dot={false}  // Enlever les "dots" à chaque point
+                        dot={false}  
                     />
                 </LineChart>
             </ResponsiveContainer>
