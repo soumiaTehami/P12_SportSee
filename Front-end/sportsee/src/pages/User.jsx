@@ -16,9 +16,6 @@ function User() {
     if (isNaN(userId)) {
         return <div>Erreur : ID utilisateur invalide</div>;
     }
-
-    console.log("ID utilisateur:", userId); // Vérifier que userId est bien un nombre
-
     return (
         <div className="app-container">
             <Navbar />

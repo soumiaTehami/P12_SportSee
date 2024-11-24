@@ -5,25 +5,6 @@ import { AverageSession } from '../../service/getData';
 import './AverageSessionDurationChart.scss';
 
 /**
- * Tooltip personnalisé pour afficher la durée dans un carré blanc.
- */
-const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className="custom-tooltip">
-                <p className="tooltip-value">{`${payload[0].value} min`}</p>
-            </div>
-        );
-    }
-    return null;
-};
-
-CustomTooltip.propTypes = {
-    active: PropTypes.bool,
-    payload: PropTypes.array,
-};
-
-/**
  * Composant AverageSessionDurationChart
  * 
  * Ce composant affiche la durée moyenne des sessions de l'utilisateur sous forme de graphique en ligne.
@@ -51,24 +32,47 @@ const AverageSessionDurationChart = ({ userId }) => {
         fetchSessionData();
     }, [userId]);
 
+    /**
+     * Tooltip personnalisé pour afficher la durée dans un carré blanc.
+     */
+    const CustomTooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="custom-tooltip">
+                    <p className="tooltip-value">{`${payload[0].value} min`}</p>
+                </div>
+            );
+        }
+        return null;
+    };
+
+    CustomTooltip.propTypes = {
+        active: PropTypes.bool,
+        payload: PropTypes.array,
+    };
+
+    // Tableau des jours de la semaine
+    const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+
     return (
         <div className="average-session-duration-chart">
             <h2 className="average-session-title">Durée moyenne des <br />sessions</h2>
-            <ResponsiveContainer width="100%" height={100}>
-                <LineChart data={sessionData} margin={{ top: 20, right: 20, left: 20, bottom: 0 }}>
+            <ResponsiveContainer width="100%" height={170}>
+                <LineChart data={sessionData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                     <XAxis 
                         dataKey="day" 
-                        tickFormatter={(tick) => String.fromCharCode(65 + tick)} 
+                        tickFormatter={(tick) => daysOfWeek[tick - 1]} 
                         tick={{ fontSize: 12, fontWeight: 500, fill: '#fff' }}
                         axisLine={false} 
                         tickLine={false} 
+                        height={20} // Réserve un espace sous le diagramme
                     />
                     <YAxis hide={true} />
                     <Tooltip content={<CustomTooltip />} />
                     <Line 
                         type="monotone" 
                         dataKey="sessionLength" 
-                        stroke="#D3D3D3" 
+                        stroke="#fff" 
                         strokeWidth={2} 
                         dot={false}  
                     />

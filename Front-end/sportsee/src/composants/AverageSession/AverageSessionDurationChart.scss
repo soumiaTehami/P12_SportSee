@@ -1,27 +1,39 @@
 .average-session-title {
   color: #d3d3d3; // Gris clair pour la couleur du texte
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 1rem;
   text-align: left;
   padding: 20px;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  font-size: 0.9375rem;
+  opacity: 0.5;
 }
+
 .average-session-duration-chart {
-  width: 258px;
-  background-color: #ff0000; /* Couleur de fond */
-  padding: 1rem; /* Espacement interne */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
+  border-radius: 5px;
+  background: #ff0000; // Couleur rouge pour le fond
+  box-shadow: 0 2px 4px #00000005;
+  width: 265px;
 
-.custom-tooltip {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-.tooltip-value {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
+  .recharts-x-axis .recharts-cartesian-axis-tick {
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    fill: #ffffff; // Blanc pour les jours
+  }
+
+  .custom-tooltip {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .tooltip-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
 }
