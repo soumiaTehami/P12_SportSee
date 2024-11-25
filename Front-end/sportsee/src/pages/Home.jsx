@@ -11,7 +11,7 @@ export default function Home() {
       <div className="user-container">
         <div className="user-card">
           <img
-            src={KarlPhoto} // Utilisation de l'import correct
+            src={KarlPhoto} 
             alt="Karl"
             className="user-photo"
           />
@@ -20,7 +20,7 @@ export default function Home() {
         </div>
         <div className="user-card">
           <img
-            src={CeciliaPhoto} // Utilisation de l'import correct
+            src={CeciliaPhoto} 
             alt="Cecilia"
             className="user-photo"
           />

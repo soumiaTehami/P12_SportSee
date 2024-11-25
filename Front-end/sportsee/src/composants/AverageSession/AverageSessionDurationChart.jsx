@@ -6,7 +6,6 @@ import './AverageSessionDurationChart.scss';
 
 /**
  * Composant AverageSessionDurationChart
- * 
  * Ce composant affiche la durée moyenne des sessions de l'utilisateur sous forme de graphique en ligne.
  * 
  * @param {Object} props - Les propriétés du composant
@@ -62,7 +61,7 @@ const AverageSessionDurationChart = ({ userId }) => {
                     <XAxis 
                         dataKey="day" 
                         tickFormatter={(tick) => daysOfWeek[tick - 1]} 
-                        tick={{ fontSize: 12, fontWeight: 500, fill: '#fff' }}
+                        tick={{ fontSize: 12, fontWeight: 500, fill: 'rgba(255, 255, 255, 0.5)' }} // Aligne la couleur sur le titre
                         axisLine={false} 
                         tickLine={false} 
                         height={20} // Réserve un espace sous le diagramme
@@ -72,7 +71,7 @@ const AverageSessionDurationChart = ({ userId }) => {
                     <Line 
                         type="monotone" 
                         dataKey="sessionLength" 
-                        stroke="#fff" 
+                        stroke="rgba(255, 255, 255, 0.5)" // Aligne la couleur sur le titre
                         strokeWidth={2} 
                         dot={false}  
                     />

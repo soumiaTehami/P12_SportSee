@@ -4,7 +4,12 @@ import PropTypes from "prop-types";
 import { Score } from "../../service/getData"; // Import de la fonction Score
 import "./ProgressionChart.scss";
 
-const COLORS = ["#FF0000"];
+// Définir des couleurs dynamiques en fonction du score
+const getColor = (score) => {
+  if (score > 0.8) return "#00FF00"; // Vert pour les scores élevés
+  if (score > 0.5) return "#FFFF00"; // Jaune pour les scores moyens
+  return "#FF0000"; // Rouge pour les scores faibles
+};
 
 function ProgressionChart({ userId }) {
   const [scoreData, setScoreData] = useState([
@@ -27,9 +32,9 @@ function ProgressionChart({ userId }) {
         }
 
         const data = responseData.data;
-
         const score = data?.score ?? data?.todayScore ?? 0;
 
+        // Mise à jour des données du score avec les couleurs dynamiques
         setScoreData([
           { name: "Progression", value: score },
           { name: "Reste", value: 1 - score },
@@ -50,17 +55,18 @@ function ProgressionChart({ userId }) {
           <Pie
             data={scoreData}
             dataKey="value"
-            innerRadius={60}
+            innerRadius={70}
             outerRadius={80}
             startAngle={90}
             endAngle={450}
+            animationDuration={500} // Animation de 500ms
           >
             {scoreData.map((entry, index) =>
               index === 0 ? (
                 <Cell
                   key={`cell-${index}`}
                   cornerRadius={10}
-                  fill={COLORS[0]}
+                  fill={getColor(scoreData[0].value)} // Utilisation de la couleur dynamique
                 />
               ) : (
                 <Cell key={`cell-${index}`} fill="transparent" />
