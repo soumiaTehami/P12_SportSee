@@ -3,7 +3,7 @@
  * @description Ce fichier contient des fonctions pour interagir avec l'API utilisateur. Chaque fonction permet de
  * récupérer des données spécifiques en fonction de l'ID utilisateur.
  */
-
+import data from "../dataMock/data";
 const baseUrl = `http://localhost:3000/user`;
 
 /**
@@ -20,14 +20,19 @@ export const Utilisateur = async (userId) => {
     const response = await fetch(baseUrl + `/${userId}`);
 
     if (!response.ok) {
+      console.log(userId + "data walo");
+
       throw new Error(
         `Erreur de chargement des données : ${response.statusText}`
       );
     }
 
-    return await response.json();
+    const res = await response.json();
+
+    return res.data;
   } catch (err) {
     console.error("Erreur lors de la récupération des données:", err);
+    return data.USER_MAIN_DATA.find((user) => user.id === userId);
   }
 };
 
