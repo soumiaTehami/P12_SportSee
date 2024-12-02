@@ -37,6 +37,7 @@ export const Utilisateur = async (userId) => {
 };
 
 /**
+ /**
  * Récupère les données d'activité quotidienne d'un utilisateur.
  *
  * @async
@@ -47,7 +48,7 @@ export const Utilisateur = async (userId) => {
  */
 export const Activities = async (userId) => {
   try {
-    const response = await fetch(baseUrl + `/${userId}/activity`);
+    const response = await fetch(`${baseUrl}/${userId}/activity`);
 
     if (!response.ok) {
       throw new Error(
@@ -55,13 +56,19 @@ export const Activities = async (userId) => {
       );
     }
 
-    return await response.json();
+    const res = await response.json();
+    return res.data; // Retourne les données d'activité spécifiques.
   } catch (err) {
-    console.error("Erreur lors de la récupération des données:", err);
+    console.error("Erreur lors de la récupération des données d'activité:", err);
+    // Retourne les données locales mockées en cas d'échec.
+    return data.USER_ACTIVITY.find((activity) => activity.userId === userId);
   }
 };
 
+
 /**
+ * 
+ /**
  * Récupère les données des sessions moyennes d'un utilisateur.
  *
  * @async
@@ -72,7 +79,7 @@ export const Activities = async (userId) => {
  */
 export const AverageSession = async (userId) => {
   try {
-    const response = await fetch(baseUrl + `/${userId}/average-sessions`);
+    const response = await fetch(`${baseUrl}/${userId}/average-sessions`);
 
     if (!response.ok) {
       throw new Error(
@@ -80,13 +87,20 @@ export const AverageSession = async (userId) => {
       );
     }
 
-    return await response.json();
+    const res = await response.json();
+    return res.data; // Retourne les données des sessions moyennes spécifiques.
   } catch (err) {
-    console.error("Erreur lors de la récupération des données:", err);
+    console.error("Erreur lors de la récupération des données des sessions moyennes:", err);
+    // Retourne les données locales mockées en cas d'échec.
+    return data.USER_AVERAGE_SESSIONS.find(
+      (session) => session.userId === userId
+    );
   }
 };
 
+
 /**
+ * /**
  * Récupère les données de performance d'un utilisateur.
  *
  * @async
@@ -97,7 +111,7 @@ export const AverageSession = async (userId) => {
  */
 export const Performance = async (userId) => {
   try {
-    const response = await fetch(baseUrl + `/${userId}/performance`);
+    const response = await fetch(`${baseUrl}/${userId}/performance`);
 
     if (!response.ok) {
       throw new Error(
@@ -105,11 +119,16 @@ export const Performance = async (userId) => {
       );
     }
 
-    return await response.json();
+    const res = await response.json();
+    return res.data; // Retourne les données de performance spécifiques.
   } catch (err) {
-    console.error("Erreur lors de la récupération des données:", err);
+    console.error("Erreur lors de la récupération des données de performance:", err);
+    // Retourne les données locales mockées en cas d'échec.
+    return data.USER_PERFORMANCE.find((perf) => perf.userId === userId);
   }
 };
+
+ 
 
 /**
  * Récupère le score quotidien d'un utilisateur.
@@ -123,16 +142,18 @@ export const Performance = async (userId) => {
 export const Score = async (userId) => {
   try {
     const response = await fetch(`${baseUrl}/${userId}/`);
+
     if (!response.ok) {
       throw new Error(
         `Erreur de chargement des données : ${response.statusText}`
       );
     }
 
-    const data = await response.json(); // Parse le JSON obtenu
-    return data; // Retourne les données
+    const res = await response.json();
+    return res.data; // Retourne les données spécifiques du score.
   } catch (err) {
-    console.error("Erreur lors de la récupération des données :", err);
-    throw err; // Relance l'erreur pour une gestion potentielle en amont
+    console.error("Erreur lors de la récupération des données de score:", err);
+    // Retourne les données locales mockées en cas d'échec.
+    return data.USER_MAIN_DATA.find((user) => user.id === userId);
   }
 };

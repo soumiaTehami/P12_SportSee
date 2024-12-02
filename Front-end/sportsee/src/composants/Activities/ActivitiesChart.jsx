@@ -54,8 +54,8 @@ export function ActivitiesChart({ userId }) {
       try {
         const result = await Performance(userId);
 
-        if (result && result.data && result.data.kind && Array.isArray(result.data.data)) {
-          const transformedData = result.data.data.map(item => ({
+        if (result && result && result.kind && Array.isArray(result.data)) {
+          const transformedData = result.data.map(item => ({
             activity: KIND_TO_ACTIVITY_MAP[item.kind] || 'Inconnu',
             value: item.value,
           }));

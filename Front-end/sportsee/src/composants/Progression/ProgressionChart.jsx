@@ -27,11 +27,11 @@ function ProgressionChart({ userId }) {
       try {
         const responseData = await Score(userId);
 
-        if (!responseData || !responseData.data) {
+        if (!responseData || !responseData) {
           throw new Error("Les données récupérées ne sont pas valides.");
         }
 
-        const data = responseData.data;
+        const data = responseData;
         const score = data?.score ?? data?.todayScore ?? 0;
 
         // Mise à jour des données du score avec les couleurs dynamiques

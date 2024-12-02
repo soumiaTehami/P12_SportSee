@@ -13,8 +13,8 @@ const UserActivityChart = ({ userId }) => {
             try {
                 const result = await Activities(userId);
 
-                if (result && result.data) {
-                    setActivityData(result.data.sessions);
+                if (result && result) {
+                    setActivityData(result.sessions);
                 }
             } catch (error) {
                 console.error("Erreur lors de la récupération des données d'activité:", error);

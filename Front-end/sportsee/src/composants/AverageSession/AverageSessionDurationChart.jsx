@@ -20,8 +20,8 @@ const AverageSessionDurationChart = ({ userId }) => {
             try {
                 const result = await AverageSession(userId);
 
-                if (result && result.data) {
-                    setSessionData(result.data.sessions);
+                if (result && result) {
+                    setSessionData(result.sessions);
                 }
             } catch (error) {
                 console.error("Erreur lors de la récupération des données de session:", error);
