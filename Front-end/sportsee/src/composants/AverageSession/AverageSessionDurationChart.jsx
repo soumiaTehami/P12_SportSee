@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
 import { AverageSession } from '../../service/getData';
 import './AverageSessionDurationChart.scss';
 
@@ -20,7 +21,7 @@ const AverageSessionDurationChart = ({ userId }) => {
             try {
                 const result = await AverageSession(userId);
 
-                if (result && result) {
+                if (result && result.sessions) {
                     setSessionData(result.sessions);
                 }
             } catch (error) {
@@ -50,6 +51,16 @@ const AverageSessionDurationChart = ({ userId }) => {
         payload: PropTypes.array,
     };
 
+    /**
+     * Curseur personnalisé pour ajouter une animation de survol.
+     */
+    const CustomCursor = ({ points, width,height }) => {
+        const { x } = points[0]
+        return (
+          <Rectangle fill="hsla(0, 0%, 0%, 9.75%)" x={x} width={width} height={height} />
+        )
+      }
+
     // Tableau des jours de la semaine
     const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
@@ -57,23 +68,26 @@ const AverageSessionDurationChart = ({ userId }) => {
         <div className="average-session-duration-chart">
             <h2 className="average-session-title">Durée moyenne des <br />sessions</h2>
             <ResponsiveContainer width="100%" height={170}>
-                <LineChart data={sessionData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+                <LineChart 
+                    data={sessionData} 
+                    margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+                >
                     <XAxis 
                         dataKey="day" 
                         tickFormatter={(tick) => daysOfWeek[tick - 1]} 
-                        tick={{ fontSize: 12, fontWeight: 500, fill: 'rgba(255, 255, 255, 0.5)' }} // Aligne la couleur sur le titre
+                        tick={{ fontSize: 12, fontWeight: 500, fill: 'rgba(255, 255, 255, 0.5)' }} // Couleur adaptée
                         axisLine={false} 
                         tickLine={false} 
-                        height={20} // Réserve un espace sous le diagramme
+                        height={20} // Espace sous le diagramme
                     />
                     <YAxis hide={true} />
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
                     <Line 
                         type="monotone" 
                         dataKey="sessionLength" 
-                        stroke="rgba(255, 255, 255, 0.5)" // Aligne la couleur sur le titre
+                        stroke="rgba(255, 255, 255, 0.5)" 
                         strokeWidth={2} 
-                        dot={false}  
+                        dot={false} 
                     />
                 </LineChart>
             </ResponsiveContainer>

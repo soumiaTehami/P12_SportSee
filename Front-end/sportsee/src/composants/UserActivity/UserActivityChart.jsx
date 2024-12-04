@@ -15,19 +15,14 @@ import './UserActivityChart.scss';
 
 // Tooltip personnalisé pour afficher les données d'activité
 const CustomTooltip = ({ active, payload }) => {
-    if (active) {
+    if (active&& payload && payload.length) {
         // Vérifiez le contenu du payload pour débogage
         console.log(payload);
 
-        const kilogram = payload[0]?.value || 0; // Valeur de poids
-        const calories = payload[1]?.value || 0
-        
-        ; // Valeur des calories
-
         return (
             <div className="custom-tooltip">
-                <p>{`${kilogram} kg`}</p>
-                <p>{`${calories} kCal`}</p>
+                <p>{`${payload[0].value} kg`}</p>
+                <p>{`${payload[1].value} kCal`}</p>
             </div>
         );
     }
