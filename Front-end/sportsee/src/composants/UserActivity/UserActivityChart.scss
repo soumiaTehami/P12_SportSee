@@ -1,37 +1,39 @@
 .user-activity-chart {
     width: 90%;
+    max-width: 1200px; // Limite la largeur pour grands écrans
+    margin: 0 auto; // Centrage horizontal
     background-color: #FBFBFB;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+
     h2 {
         font-size: 1.5rem;
         color: #333;
         margin-bottom: 15px;
-        text-align: left;  // Aligner le texte à gauche
+        text-align: left; // Aligner le texte à gauche
         font-weight: 500;
     }
-  
+
     .custom-tooltip {
-      background-color: #E60000;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
-      font-size: 0.875rem;
-      color:#fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  
-      p {
-        margin: 0;
-      }
+        background-color: #E60000;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 0.875rem;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+        p {
+            margin: 0;
+        }
     }
-  
-   }  
-   .custom-legend {
+}
+
+.custom-legend {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 20px;
+    margin-top: 10px; // Ajout d'espace au-dessus de la légende
 
     .legend-item {
         display: flex;
@@ -47,6 +49,30 @@
         .legend-text {
             font-size: 14px;
             font-weight: 500;
+            color: #333; // Couleur améliorée pour lisibilité
+        }
+    }
+}
+
+// Responsiveness pour petits écrans
+@media (max-width: 768px) {
+    .user-activity-chart {
+        width: 95%; // Réduit légèrement la largeur
+        padding: 15px;
+
+        h2 {
+            font-size: 1.25rem; // Réduit légèrement la taille de police
+        }
+    }
+
+    .custom-legend {
+        justify-content: center; // Centre la légende sur petits écrans
+        gap: 5px;
+
+        .legend-item {
+            .legend-text {
+                font-size: 12px; // Réduit légèrement la taille de police
+            }
         }
     }
 }

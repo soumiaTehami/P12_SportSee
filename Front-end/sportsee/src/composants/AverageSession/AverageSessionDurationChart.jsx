@@ -37,7 +37,7 @@ const AverageSessionDurationChart = ({ userId }) => {
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
-                <div className="custom-tooltip">
+                <div className="custom-tooltip animated-tooltip">
                     <p className="tooltip-value">{`${payload[0].value} min`}</p>
                 </div>
             );
