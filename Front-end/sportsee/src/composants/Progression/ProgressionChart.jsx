@@ -4,19 +4,37 @@ import PropTypes from "prop-types";
 import { Score } from "../../service/getData"; // Import de la fonction Score
 import "./ProgressionChart.scss";
 
-// Définir des couleurs dynamiques en fonction du score
+/**
+ * Retourne une couleur en fonction de la valeur du score.
+ * 
+ * @param {number} score - Le score de l'utilisateur, compris entre 0 et 1.
+ * @returns {string} - Code couleur hexadécimal (#RRGGBB).
+ */
 const getColor = (score) => {
   if (score > 0.8) return "#00FF00"; // Vert pour les scores élevés
   if (score > 0.5) return "#FFFF00"; // Jaune pour les scores moyens
   return "#FF0000"; // Rouge pour les scores faibles
 };
 
+/**
+ * Composant React qui affiche un graphique circulaire représentant le score de progression de l'utilisateur.
+ * 
+ * @param {Object} props - Les propriétés du composant.
+ * @param {number} props.userId - L'ID de l'utilisateur dont les données doivent être affichées.
+ * @returns {JSX.Element} - Le composant graphique.
+ */
 function ProgressionChart({ userId }) {
   const [scoreData, setScoreData] = useState([
     { name: "Progression", value: 0 },
     { name: "Reste", value: 1 },
   ]);
 
+  /**
+   * Récupère les données de score de l'utilisateur et met à jour l'état local.
+   * 
+   * @async
+   * @function fetchScoreData
+   */
   useEffect(() => {
     if (!userId) {
       console.error("L'ID utilisateur est manquant ou invalide.");
@@ -27,7 +45,7 @@ function ProgressionChart({ userId }) {
       try {
         const responseData = await Score(userId);
 
-        if (!responseData || !responseData) {
+        if (!responseData) {
           throw new Error("Les données récupérées ne sont pas valides.");
         }
 
@@ -94,8 +112,9 @@ function ProgressionChart({ userId }) {
   );
 }
 
-// Ajout des PropTypes
+// Ajout des PropTypes pour la validation des propriétés du composant
 ProgressionChart.propTypes = {
+  /** L'ID de l'utilisateur. */
   userId: PropTypes.number.isRequired,
 };
 
