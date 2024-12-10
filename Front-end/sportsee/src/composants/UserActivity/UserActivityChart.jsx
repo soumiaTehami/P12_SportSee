@@ -8,21 +8,17 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
+  ResponsiveContainer
 } from 'recharts';
 import { Activities } from '../../service/getData';
 import './UserActivityChart.scss';
 
 // Tooltip personnalisé pour afficher les données d'activité
-const CustomTooltip = ({ active = true, payload }) => {
-  
-  
-  
-  if (active) {
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length > 0) {
     const { kilogram, calories } = payload[0].payload;
-
     return (
-      <div className="custom-tooltip">
+      <div className="barre-custom-tooltip">
         <p>{`${kilogram || 0} kg`}</p>
         <p>{`${calories || 0} kCal`}</p>
       </div>
@@ -58,28 +54,28 @@ const UserActivityChart = ({ userId }) => {
     const fetchActivityData = async () => {
       try {
         const result = await Activities(userId);
-        
-        
-  
-        if (result && result.sessions) {
+        if (result && Array.isArray(result.sessions)) {
           setActivityData(result.sessions);
-      
-        
         } else {
-          console.error("Aucune donnée de session disponible.");
+          console.error("Les données reçues ne sont pas valides.");
+          setActivityData([]);
         }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
+        setActivityData([]);
       }
     };
-  
+
     fetchActivityData();
   }, [userId]);
-  
 
   // Formater le jour pour n'afficher que le dernier chiffre
   const formatDay = (day) => day.slice(-1);
-console.log(activityData);
+
+  // Vérifier si les données sont chargées
+  if (activityData.length === 0) {
+    return <p>Chargement des données ou aucune donnée disponible.</p>;
+  }
 
   return (
     <div className="user-activity-chart">
@@ -115,6 +111,8 @@ console.log(activityData);
             hide
           />
           <Tooltip content={<CustomTooltip />} />
+                   
+                    
           <Bar
             yAxisId="kilogram"
             dataKey="kilogram"
