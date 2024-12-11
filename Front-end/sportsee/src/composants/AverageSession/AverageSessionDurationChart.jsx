@@ -61,7 +61,7 @@ const AverageSessionDurationChart = ({ userId }) => {
                 fill="hsla(0, 0%, 0%, 0.1)" // Couleur semi-transparente
                 x={x}
                 y={0}
-                width={500} // Largeur ajustée pour couvrir tout l'écran
+                width={265} // Largeur ajustée pour couvrir tout l'écran
                 height={300} // Hauteur égale à celle du conteneur
             />
         );
