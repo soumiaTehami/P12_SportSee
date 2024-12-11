@@ -54,12 +54,19 @@ const AverageSessionDurationChart = ({ userId }) => {
     /**
      * Curseur personnalisé pour ajouter une animation de survol.
      */
-    const CustomCursor = ({ points, width,height }) => {
-        const { x } = points[0]
+    const CustomCursor = ({ points }) => {
+        const { x } = points[0];
         return (
-          <Rectangle fill="hsla(0, 0%, 0%, 9.75%)" x={x} width={width} height={height} />
-        )
-      }
+            <Rectangle
+                fill="hsla(0, 0%, 0%, 0.1)" // Couleur semi-transparente
+                x={x}
+                y={0}
+                width={500} // Largeur ajustée pour couvrir tout l'écran
+                height={300} // Hauteur égale à celle du conteneur
+            />
+        );
+    };
+    
 
     // Tableau des jours de la semaine
     const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
